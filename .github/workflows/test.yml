@@ -1,0 +1,23 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**'
+      - '!.github/**'
+      - '!.gitignore'
+      - '.github/workflows/test.yml'
+  workflow_dispatch:
+
+jobs:
+  nix:
+    name: go test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Nix
+        uses: cachix/install-nix-action@v18
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Run tests
+        run: nix-shell --pure --run 'go test'
