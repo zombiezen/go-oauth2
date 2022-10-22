@@ -18,6 +18,7 @@ import (
 )
 
 // Client is a Google OAuth 2.0 client.
+// It implements the [oauth2.Refresher] interface.
 type Client struct {
 	client       *http.Client
 	tokenURL     string
@@ -38,6 +39,7 @@ func (r *Client) Exchange(ctx context.Context, code string, redirectURI string) 
 }
 
 // Refresh obtains an access token from a provided refresh token.
+// See the [oauth2.Refresher] interface for more details.
 func (r *Client) Refresh(ctx context.Context, rt oauth2.RefreshToken) (oauth2.AccessToken, oauth2.RefreshToken, error) {
 	return r.do(ctx, &accesstoken.Request{
 		ClientID:     r.clientID,
