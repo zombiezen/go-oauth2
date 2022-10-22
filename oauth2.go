@@ -64,7 +64,7 @@ type Credentials struct {
 // then the credentials will return errors once the initial token expires.
 // If the initial access token is invalid,
 // then a new token will be obtained based on the refresh token
-// on the first call to [Credentials.Token].
+// on the first call to [Credentials.AccessToken].
 func NewCredentials(initial AccessToken, refresh RefreshToken, refresher Refresher) *Credentials {
 	return &Credentials{
 		refresher: refresher,
